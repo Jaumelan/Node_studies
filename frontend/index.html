@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <title>Loja de Games</title>
+  </head>
+  <body>
+    <header>
+      <h1>Loja de Games</h1>
+    </header>
+    <main>
+      <div id="productList">
+        <h2>Produtos</h2>
+        <ul id="games"></ul>
+      </div>
+
+      <form id="registerGame">
+        <h4>Cadastrar novo jogo</h4>
+        <div>
+          <label for="name">Nome</label>
+          <input type="text" id="name" name="name" />
+        </div>
+        <div>
+          <label for="price">Preço</label>
+          <input type="number" id="price" name="price" />
+        </div>
+        <div>
+          <label for="year">Ano</label>
+          <input type="number" id="year" />
+        </div>
+
+        <button type="button" id="registerButton">Cadastrar</button>
+      </form>
+      <form id="updateGame">
+        <h4>Editar um jogo</h4>
+        <div>
+          <label for="nameUpd">Nome</label>
+          <input type="text" id="nameUpd" name="nameUpd" />
+        </div>
+        <div>
+          <label for="priceUpd">Preço</label>
+          <input type="number" id="priceUpd" name="priceUpd" />
+        </div>
+        <div>
+          <label for="yearUpd">Ano</label>
+          <input type="number" id="yearUpd" />
+        </div>
+
+        <button type="button" id="updateButton">Editar</button>
+      </form>
+      <div id="answer"></div>
+    </main>
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+  <script src="index.js"></script>
+</html>
