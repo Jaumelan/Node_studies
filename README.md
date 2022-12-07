@@ -1,0 +1,1 @@
+Rest API com base de dados Sqlite e autenticação com JWT
