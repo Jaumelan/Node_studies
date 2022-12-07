@@ -1,0 +1,1 @@
+aplicação desenvolvida em React usando axios para consumir API Rest
