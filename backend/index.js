@@ -53,7 +53,7 @@ app.get("/game/:id", auth, (req, res) => {
       return;
     }
     if (row.email !== email) {
-      res.status(400).json({ error: "Invalid user" });
+      res.status(401).json({ error: "Invalid user" });
       return;
     }
   });
@@ -87,7 +87,7 @@ app.post("/game", auth, (req, res) => {
       return;
     }
     if (row.email !== email) {
-      res.status(400).json({ error: "Invalid user" });
+      res.status(401).json({ error: "Invalid user" });
       return;
     }
   });
@@ -134,7 +134,7 @@ app.delete("/game/:id", auth, (req, res) => {
       return;
     }
     if (row.email !== email) {
-      res.status(400).json({ error: "Invalid user" });
+      res.status(401).json({ error: "Invalid user" });
       return;
     }
   });
@@ -166,17 +166,17 @@ app.put("/game/:id", auth, (req, res) => {
       return;
     }
     if (row.email !== email) {
-      res.status(400).json({ error: "Invalid user" });
+      res.status(401).json({ error: "Invalid user" });
       return;
     }
   });
-  
+
   if (isNaN(req.params.id)) {
     res.sendStatus(400);
   } else {
     const id = parseInt(req.params.id);
     const { title, price, year } = req.body;
-    console.log(req.body)
+    console.log(req.body);
     const sql =
       "update games set title = coalesce(?, title), year = coalesce(?, year), price = coalesce(?, price) where id = ?";
     const params = [title, Number(year), Number(price), Number(id)];

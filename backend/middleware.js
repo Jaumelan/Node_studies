@@ -7,12 +7,12 @@ function auth(req, res, next) {
 
   try {
     const decoded = jwt.verify(token, "exer1");
-    console.log(decoded);
+    //console.log(decoded);
     req.user = decoded;
     next();
   } catch (error) {
     console.log(error)
-    res.status(400).send("Invalid token.");
+    res.status(401).send("Invalid token.");
   }
 }
 
