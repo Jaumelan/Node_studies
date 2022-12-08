@@ -15,6 +15,33 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get("/games", auth, (req, res) => {
+  const HATEOAS = [
+    {
+      href: "http://localhost:3001/game/0",
+      rel: "get_game",
+      method: "GET",
+    },
+    {
+      href: "http://localhost:3001/auth",
+      rel: "login",
+      method: "POST",
+    },
+    {
+      href: "http://localhost:3001/game",
+      rel: "create_game",
+      method: "POST",
+    },
+    {
+      href: "http://localhost:3001/game/0",
+      rel: "delete_game",
+      method: "DELETE",
+    },
+    {
+      href: "http://localhost:3001/game/0",
+      rel: "update_game",
+      method: "PUT",
+    },
+  ];
   const { id, email } = req.user;
   const userSql = "select email from users where id =?";
   const userParams = [id];
@@ -39,6 +66,7 @@ app.get("/games", auth, (req, res) => {
     res.json({
       message: "success",
       data: rows,
+      _links: HATEOAS,
     });
   });
 });
@@ -62,6 +90,33 @@ app.get("/game/:id", auth, (req, res) => {
     res.sendStatus(400);
   } else {
     const id = parseInt(req.params.id);
+    const HATEOAS = [
+      {
+        href: "http://localhost:3001/game/0",
+        rel: "get_game",
+        method: "GET",
+      },
+      {
+        href: "http://localhost:3001/auth",
+        rel: "login",
+        method: "POST",
+      },
+      {
+        href: "http://localhost:3001/game",
+        rel: "create_game",
+        method: "POST",
+      },
+      {
+        href: `http://localhost:3001/game/${id}`,
+        rel: "delete_game",
+        method: "DELETE",
+      },
+      {
+        href: `http://localhost:3001/game/${id}`,
+        rel: "update_game",
+        method: "PUT",
+      },
+    ];
     const sql = "select * from games where id = ?";
     const params = [id];
     db.get(sql, params, (err, row) => {
@@ -72,6 +127,7 @@ app.get("/game/:id", auth, (req, res) => {
       res.json({
         message: "success",
         data: row,
+        _links: HATEOAS,
       });
     });
   }
@@ -91,6 +147,34 @@ app.post("/game", auth, (req, res) => {
       return;
     }
   });
+
+  const HATEOAS = [
+    {
+      href: "http://localhost:3001/game/0",
+      rel: "get_game",
+      method: "GET",
+    },
+    {
+      href: "http://localhost:3001/auth",
+      rel: "login",
+      method: "POST",
+    },
+    {
+      href: "http://localhost:3001/game",
+      rel: "create_game",
+      method: "POST",
+    },
+    {
+      href: "http://localhost:3001/game/0",
+      rel: "delete_game",
+      method: "DELETE",
+    },
+    {
+      href: "http://localhost:3001/game/0",
+      rel: "update_game",
+      method: "PUT",
+    },
+  ];
 
   const { title, price, year } = req.body;
   const priceNum = Number(price);
@@ -113,6 +197,7 @@ app.post("/game", auth, (req, res) => {
               price: priceNum,
               year: yearNum,
             },
+            _links: HATEOAS,
           });
         });
       } else {
@@ -126,6 +211,28 @@ app.post("/game", auth, (req, res) => {
 
 app.delete("/game/:id", auth, (req, res) => {
   const { id, email } = req.user;
+  const HATEOAS = [
+    {
+      href: `http://localhost:3001/game/${id}`,
+      rel: "get_game",
+      method: "GET",
+    },
+    {
+      href: "http://localhost:3001/auth",
+      rel: "login",
+      method: "POST",
+    },
+    {
+      href: "http://localhost:3001/game",
+      rel: "create_game",
+      method: "POST",
+    },
+    {
+      href: `http://localhost:3001/game/${id}`,
+      rel: "update_game",
+      method: "PUT",
+    },
+  ];
   const userSql = "select email from users where id =?";
   const userParams = [id];
   db.get(userSql, userParams, (err, row) => {
@@ -151,7 +258,7 @@ app.delete("/game/:id", auth, (req, res) => {
         res.status(400).json({ error: res.message });
         return;
       }
-      res.json({ message: "deleted", changes: this.changes });
+      res.json({ message: "deleted", changes: this.changes, _links: HATEOAS });
     });
   }
 });
@@ -175,6 +282,28 @@ app.put("/game/:id", auth, (req, res) => {
     res.sendStatus(400);
   } else {
     const id = parseInt(req.params.id);
+    const HATEOAS = [
+      {
+        href: `http://localhost:3001/game/${id}`,
+        rel: "get_game",
+        method: "GET",
+      },
+      {
+        href: "http://localhost:3001/auth",
+        rel: "login",
+        method: "POST",
+      },
+      {
+        href: "http://localhost:3001/game",
+        rel: "create_game",
+        method: "POST",
+      },
+      {
+        href: `http://localhost:3001/game/${id}`,
+        rel: "delete_game",
+        method: "DELETE",
+      },
+    ];
     const { title, price, year } = req.body;
     console.log(req.body);
     const sql =
@@ -194,6 +323,7 @@ app.put("/game/:id", auth, (req, res) => {
           year: year,
         },
         changes: this.changes,
+        _links: HATEOAS,
       });
     });
   }
@@ -219,6 +349,23 @@ app.post("/register", (req, res) => {
             res.status(400).json({ error: err.message });
             return;
           }
+          const HATEOAS = [
+            {
+              href: `http://localhost:3001/user/${this.lastID}`,
+              rel: "get_user",
+              method: "GET",
+            },
+            {
+              href: "http://localhost:3001/auth",
+              rel: "login",
+              method: "POST",
+            },
+            {
+              href: "http://localhost:3001/register",
+              rel: "register",
+              method: "POST",
+            },
+          ];
           res.json({
             message: "success",
             data: {
@@ -236,9 +383,75 @@ app.post("/register", (req, res) => {
   }
 });
 
+app.get("/user/:id", auth, (req, res) => {
+  const { id, email } = req.user;
+  const userSql = "select email from users where id =?";
+  const userParams = [id];
+  db.get(userSql, userParams, (err, row) => {
+    if (err) {
+      res.status(400).json({ error: err.message });
+      return;
+    }
+    if (row.email !== email) {
+      res.status(401).json({ error: "Invalid user" });
+      return;
+    }
+  });
+
+  if (isNaN(req.params.id)) {
+    res.sendStatus(400);
+  } else {
+    const id = parseInt(req.params.id);
+    const HATEOAS = [
+      {
+        href: `http://localhost:3001/user/${id}`,
+        rel: "get_user",
+        method: "GET",
+      },
+      {
+        href: "http://localhost:3001/auth",
+        rel: "login",
+        method: "POST",
+      },
+      {
+        href: "http://localhost:3001/register",
+        rel: "register",
+        method: "POST",
+      },
+    ];
+    const sql = "select * from users where id = ?";
+    const params = [id];
+    db.get
+      (sql
+      , params, (err, row) => {
+        if (err) {
+          res.status(400).json({ error: err.message });
+          return;
+        }
+        res.json({
+          message: "success",
+          data: row,
+          _links: HATEOAS,
+        });
+      });
+  }
+});
+
 app.post("/auth", (req, res) => {
   const { email, password } = req.body;
   if (typeof email === "string" && typeof password === "string") {
+    const HATEOAS = [
+      {
+        href: "http://localhost:3001/auth",
+        rel: "login",
+        method: "POST",
+      },
+      {
+        href: "http://localhost:3001/register",
+        rel: "register",
+        method: "POST",
+      },
+    ];
     const sql = "select * from users where email = ?";
     const params = [email];
     db.get(sql, params, (err, row) => {
@@ -270,6 +483,7 @@ app.post("/auth", (req, res) => {
                     email: row.email,
                   },
                   token,
+                  _links: HATEOAS,
                 });
               }
             }

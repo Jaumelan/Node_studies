@@ -24,7 +24,7 @@ API para acessar a uma lista de jogos, com título, preço e ano de lançamento.
             "id": 2,
             "title": "Sea of Thieves",
             "year": 2018,
-            "price": 40
+            "price": 80
         },
         {
             "id": 3,
@@ -37,6 +37,39 @@ API para acessar a uma lista de jogos, com título, preço e ano de lançamento.
             "title": "Gatos V",
             "year": 2010,
             "price": 63
+        },
+        {
+            "id": 6,
+            "title": "Age of Empires",
+            "year": 2018,
+            "price": 100
+        }
+    ],
+    "_links": [
+        {
+            "href": "http://localhost:3001/game/0",
+            "rel": "get_game",
+            "method": "GET"
+        },
+        {
+            "href": "http://localhost:3001/auth",
+            "rel": "login",
+            "method": "POST"
+        },
+        {
+            "href": "http://localhost:3001/game",
+            "rel": "create_game",
+            "method": "POST"
+        },
+        {
+            "href": "http://localhost:3001/game/0",
+            "rel": "delete_game",
+            "method": "DELETE"
+        },
+        {
+            "href": "http://localhost:3001/game/0",
+            "rel": "update_game",
+            "method": "PUT"
         }
     ]
 }	
@@ -55,11 +88,38 @@ API para acessar a uma lista de jogos, com título, preço e ano de lançamento.
     ``{
     "message": "success",
     "data": {
-        "id": 1,
-        "title": "Call of Duty MW",
-        "year": 2019,
-        "price": 60
-    }
+        "id": 6,
+        "title": "Age of Empires",
+        "year": 2018,
+        "price": 100
+    },
+    "_links": [
+        {
+            "href": "http://localhost:3001/game/0",
+            "rel": "get_game",
+            "method": "GET"
+        },
+        {
+            "href": "http://localhost:3001/auth",
+            "rel": "login",
+            "method": "POST"
+        },
+        {
+            "href": "http://localhost:3001/game",
+            "rel": "create_game",
+            "method": "POST"
+        },
+        {
+            "href": "http://localhost:3001/game/6",
+            "rel": "delete_game",
+            "method": "DELETE"
+        },
+        {
+            "href": "http://localhost:3001/game/6",
+            "rel": "update_game",
+            "method": "PUT"
+        }
+    ]
 }``
 
     **400**: Erro na requisição/Dados incorretos.
@@ -81,11 +141,38 @@ API para acessar a uma lista de jogos, com título, preço e ano de lançamento.
     ``{
     "message": "success",
     "data": {
-        "id": 5,
+        "id": 6,
         "title": "Age of Empires",
         "price": 100,
         "year": 2018
-    }
+    },
+    "_links": [
+        {
+            "href": "http://localhost:3001/game/0",
+            "rel": "get_game",
+            "method": "GET"
+        },
+        {
+            "href": "http://localhost:3001/auth",
+            "rel": "login",
+            "method": "POST"
+        },
+        {
+            "href": "http://localhost:3001/game",
+            "rel": "create_game",
+            "method": "POST"
+        },
+        {
+            "href": "http://localhost:3001/game/0",
+            "rel": "delete_game",
+            "method": "DELETE"
+        },
+        {
+            "href": "http://localhost:3001/game/0",
+            "rel": "update_game",
+            "method": "PUT"
+        }
+    ]
 }``
 
     **400**: Erro na requisição/Dados inválidos
@@ -98,7 +185,29 @@ API para acessar a uma lista de jogos, com título, preço e ano de lançamento.
     **200**: Jogo deletado com sucesso. Exemplo:
     ``{
     "message": "deleted",
-    "changes": 1
+    "changes": 1,
+    "_links": [
+        {
+            "href": "http://localhost:3001/game/2",
+            "rel": "get_game",
+            "method": "GET"
+        },
+        {
+            "href": "http://localhost:3001/auth",
+            "rel": "login",
+            "method": "POST"
+        },
+        {
+            "href": "http://localhost:3001/game",
+            "rel": "create_game",
+            "method": "POST"
+        },
+        {
+            "href": "http://localhost:3001/game/2",
+            "rel": "update_game",
+            "method": "PUT"
+        }
+    ]
 }``
 
     **400**: Erro na requisição
@@ -116,9 +225,31 @@ API para acessar a uma lista de jogos, com título, preço e ano de lançamento.
     "message": "success",
     "data": {
         "id": 2,
-        "price": 80
+        "price": 95
     },
-    "changes": 1
+    "changes": 1,
+    "_links": [
+        {
+            "href": "http://localhost:3001/game/2",
+            "rel": "get_game",
+            "method": "GET"
+        },
+        {
+            "href": "http://localhost:3001/auth",
+            "rel": "login",
+            "method": "POST"
+        },
+        {
+            "href": "http://localhost:3001/game",
+            "rel": "create_game",
+            "method": "POST"
+        },
+        {
+            "href": "http://localhost:3001/game/2",
+            "rel": "delete_game",
+            "method": "DELETE"
+        }
+    ]
 }``
 
     **400**: Erro na requisição
@@ -167,7 +298,19 @@ API para acessar a uma lista de jogos, com título, preço e ano de lançamento.
         "name": "Tester 1",
         "email": "teste1@teste.com"
     },
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ0ZXN0ZTFAdGVzdGUuY29tIiwiaWF0IjoxNjcwNDUyODQ0LCJleHAiOjE2NzA0NTY0NDR9.M__9QqSg0947Ia7-TXaOBP2vGO6-_sNv-6aDVPO2UPI"
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ0ZXN0ZTFAdGVzdGUuY29tIiwiaWF0IjoxNjcwNDk5Mzc1LCJleHAiOjE2NzA1MDI5NzV9.-SM3OvJYlRk0SkG39oC0uYT6wIuECLH-LZy2AGwJHrM",
+    "_links": [
+        {
+            "href": "http://localhost:3001/auth",
+            "rel": "login",
+            "method": "POST"
+        },
+        {
+            "href": "http://localhost:3001/register",
+            "rel": "register",
+            "method": "POST"
+        }
+    ]
 }``
 
     **400**: Erro na requisição
