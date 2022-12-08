@@ -61,6 +61,7 @@ API para acessar a uma lista de jogos, com título, preço e ano de lançamento.
         "price": 60
     }
 }``
+
     **400**: Erro na requisição/Dados incorretos.
     **401**: Usuário inválido/Token inválido
 3. ### POST /game
@@ -86,6 +87,7 @@ API para acessar a uma lista de jogos, com título, preço e ano de lançamento.
         "year": 2018
     }
 }``
+
     **400**: Erro na requisição/Dados inválidos
     **401**: Token inválido/Usuário inválido.
 4. ### DELETE /game/:id
@@ -98,6 +100,7 @@ API para acessar a uma lista de jogos, com título, preço e ano de lançamento.
     "message": "deleted",
     "changes": 1
 }``
+
     **400**: Erro na requisição
     **401**: Usuário inválido/Token inválido
 5. ### PUT /game/:id
@@ -117,6 +120,7 @@ API para acessar a uma lista de jogos, com título, preço e ano de lançamento.
     },
     "changes": 1
 }``
+
     **400**: Erro na requisição
     **401**: Usuário inválido/Token inválido
 6. ### POST /register
@@ -142,6 +146,7 @@ API para acessar a uma lista de jogos, com título, preço e ano de lançamento.
         "password": "123teste"
     }
 }``
+
     **400**: Erro na requisição
     
 7. ### POST /auth
@@ -164,5 +169,6 @@ API para acessar a uma lista de jogos, com título, preço e ano de lançamento.
     },
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ0ZXN0ZTFAdGVzdGUuY29tIiwiaWF0IjoxNjcwNDUyODQ0LCJleHAiOjE2NzA0NTY0NDR9.M__9QqSg0947Ia7-TXaOBP2vGO6-_sNv-6aDVPO2UPI"
 }``
+
     **400**: Erro na requisição
 	 
